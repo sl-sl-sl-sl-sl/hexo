@@ -6,6 +6,13 @@
 build/
 DerivedData/
 public/
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
 
 ## Various settings
 *.pbxuser
