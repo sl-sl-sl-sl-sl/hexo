@@ -23,6 +23,10 @@ feed:
   path: atom.xml
   limit: 10
 
+# Sitemap
+sitemap:
+  path: sitemap.xml
+
 # Directory
 source_dir: source
 public_dir: public
