@@ -9,6 +9,7 @@ description:
 author: sl2577
 language: zh-Hans
 timezone:
+rss: /atom.xml
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'

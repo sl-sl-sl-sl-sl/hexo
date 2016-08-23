@@ -19,7 +19,7 @@ tags:
 
 # Unicode
 	
-**Unicode** 是21位编码, 不是16位, 被分为17个平面 [Plane](https://en.wikipedia.org/wiki/Plane_&#41;Unicode&#41;), 每个平面有65536个字符. 0号平面叫做基本多文种平面 (Basic Multilingual Plane, BMP), 涵盖了几乎所有字符, 除了emoji.
+`Unicode` 是21位编码, 不是16位, 被分为17个平面 [Plane](https://en.wikipedia.org/wiki/Plane_&#41;Unicode&#41;), 每个平面有65536个字符. 0号平面叫做基本多文种平面 (Basic Multilingual Plane, BMP), 涵盖了几乎所有字符, 除了 `emoji`.
 
 ### 码点
 单一码点: 一般字符都是单一码点
@@ -40,7 +40,7 @@ tags:
 
 ### 正规形式 
 
-在Unicode里, 判断字符串的等价性并不是一个简单概念, 为了鉴定标准等价与相容等价, Unicode定义了正规化(normalization)算法. 正规化一个字符串的意思是：为了能使它与另一个正规化了的字符串进行二进制比较(binary-compare)
+在 `Unicode` 里, 判断字符串的等价性并不是一个简单概念, 为了鉴定标准等价与相容等价, `Unicode` 定义了正规化(normalization)算法. 正规化一个字符串的意思是：为了能使它与另一个正规化了的字符串进行二进制比较(binary-compare)
 
 ` | 合成形式(é): | 分解形式 (e + ´ )
 :------------: | :-------------: | :------------:
@@ -49,21 +49,21 @@ tags:
 相容等价 | KC | KD
 ` | precomposedStringWithCompatibilityMapping | decomposedStringWithCompatibilityMapping
 
-仅仅是为了比较的话, 先把字符串正规化成分解形式(D)还是合成形式(C)并不重要, 但是C包含两个步骤,先分解再合成, 所有D更快, Unicode联盟推荐用C的方式存储, 这是为了兼容旧的编码系统. 
+仅仅是为了比较的话, 先把字符串正规化成分解形式(D)还是合成形式(C)并不重要, 但是C包含两个步骤,先分解再合成, 所有D更快, `Unicode`联盟推荐用C的方式存储, 这是为了兼容旧的编码系统. 
 
 ### 字形变体
 
-Unicode提供一个叫做变体序列(variation sequences)的机制. 一个基准字符加上256个变体选择符
-	emoji的样式就是变体序列, 例: 彩色的伞与黑白的伞  ☔️ (U+2614 U+FE0F), ☔︎ (U+2614 U+FE0E)
+`Unicode`提供一个叫做变体序列(variation sequences)的机制. 一个基准字符加上256个变体选择符
+	`emoji`的样式就是变体序列, 例: 彩色的伞与黑白的伞  ☔️ (U+2614 U+FE0F), ☔︎ (U+2614 U+FE0E)
 
 ### UTF-32
 
-UTF-32每个码点上使用整32位, 每一个UTF-32都可以直接表示对应的码点, 但是从未在实际中使用, 因为每个字符占用4字节太浪费控件
+`UTF-32` 每个码点上使用整32位, 每一个 `UTF-32` 都可以直接表示对应的码点, 但是从未在实际中使用, 因为每个字符占用4字节太浪费控件
 
 ##UTF-16 与 代理对 (Surrogate Pairs)
-UTF-16是一种长度可变的编码, 基本多文中平面(BMP)中每一个码点都直接与一个码元相映射. 其他平面(plane)都是两个16位码元来编码的, 这合起来表示一个码点的码元就叫代理对.
+`UTF-16` 是一种长度可变的编码, 基本多文中平面(BMP)中每一个码点都直接与一个码元相映射. 其他平面(plane)都是两个16位码元来编码的, 这合起来表示一个码点的码元就叫代理对.
 
-为了避免使用UTF-16编码的字符串字节序列产生歧义, Unicode限制了U+0800到U+DFFF范围内的编码用于UTF-16, 这个范围外的序列为代理对的一部分. UTF-16下, U+0FFFF是编码最高值
+为了避免使用 `UTF-16` 编码的字符串字节序列产生歧义, `Unicode` 限制了 `U+0800` 到 `U+DFFF` 范围内的编码用于 `UTF-16`, 这个范围外的序列为代理对的一部分. `UTF-16` 下, `U+0FFFF` 是编码最高值
 
 ### 字节顺序
 
@@ -71,15 +71,15 @@ UTF-16是一种长度可变的编码, 基本多文中平面(BMP)中每一个码�
 
 ##UTF-8 (Ken Thompson 和 Rob Pike)
 	
-UTF-8 使用1~4个字节来编码一个码点. 从0到127的这些码点直接映射成1个字节(与ASCII完全相同), 接下来的1920歌码点映射成2个字节, BMP里剩下的码点需要3个字节. Unicode的其他平面里的码点则需要4个字节. UTF-8是基于8位的码元的, 因此不需要关心字节顺序.
+`UTF-8` 使用1~4个字节来编码一个码点. 从0到127的这些码点直接映射成1个字节(与ASCII完全相同), 接下来的1920歌码点映射成2个字节, BMP里剩下的码点需要3个字节. `Unicode` 的其他平面里的码点则需要4个字节. `UTF-8` 是基于8位的码元的, 因此不需要关心字节顺序.
 	
-UTF-8 成为存储和交流 Unicode 文本方面的最佳编码, 由于其有效率的空间使用(仅就西方语言来讲)，以及不需要操心字节顺序, 它现在也已经是文件格式、网络协议以及 Web API 领域里事实上的标准了.
+`UTF-8` 成为存储和交流 `Unicode` 文本方面的最佳编码, 由于其有效率的空间使用(仅就西方语言来讲)，以及不需要操心字节顺序, 它现在也已经是文件格式、网络协议以及 Web API 领域里事实上的标准了.
 
 ### 长度
 	
 基本多稳重平面外的字符:
 
-随着emoji被引入Unicode, 经常会遇到代理对
+随着emoji被引入`Unicode`, 经常会遇到代理对
 
 `[🌍 length] == 2  true`
 
@@ -98,11 +98,11 @@ UTF-8 成为存储和交流 Unicode 文本方面的最佳编码, 由于其有效
 
 ### NSString + Unicode
 	
-NSString 完全建立在Unicode之上, CFString也包含了NSString的底层实现.
+NSString 完全建立在 `Unicode` 之上, `CFString` 也包含了 `NSString` 的底层实现.
  
 `typedef unsigned short unichar`
 
-`unichar`为16位无符号整形, 不够用来表示21Unicode字符.
+`unichar` 为16位无符号整形, 不够用来表示21位 `Unicode` 字符.
 
 		- (unichar)characterAtIndex: 	
 	
@@ -192,16 +192,16 @@ NSString 完全建立在Unicode之上, CFString也包含了NSString的底层实�
 	
 当知道字符编码类型时, `-[NSString initWithData:encoding:]` 使用这个方法实例化字符串, 但是这个方法不提供错误信息.
 	
-虽然文本文件本身不包含编码信息, 但 NSString 会通过查看扩展文件属性 (extented file attributes)或者规律试探(UTF-8文件里不会出现某些特定的二进制序列)猜测来确定文件的编码, 可以使用 `-[NSString initWithContentsOfURL:encoding:error:]` 这个方法，来从编码已知的文件里读取文本。
+虽然文本文件本身不包含编码信息, 但 `NSString` 会通过查看扩展文件属性 (extented file attributes)或者规律试探(UTF-8文件里不会出现某些特定的二进制序列)猜测来确定文件的编码, 可以使用 `-[NSString initWithContentsOfURL:encoding:error:]` 这个方法，来从编码已知的文件里读取文本。
 	
 如果不得不猜测文件的编码:
 
 1. 试试这两个方法：`stringWithContentsOfFile:usedEncoding:error:` 或者 `initWithContentsOfFile:usedEncoding:error:` （或者这两个方法参数为 URL 的等价方法）。 这些方法会尝试猜测资源的编码，如果猜测成功，会以引用的形式带回所用的编码。
 2. 如果 1 失败了，试着用 UTF-8 读取资源。
-3. 如果 2 失败了，试试合适的老的编码。 这里「合适的」取决于具体情况。它可以是默认的 C 语言字符串编码，也可以是 ISO 或者 Windows Latin 1 编码，亦或者是其它的，取决于你的数据来源。
-4. 最终，还可以试试 `Application Kit` 里 `NSAttributedString` 类的载入方法（比如：`initWithFileURL:options:documentAttributes:error:`）。这些方法会尝试纯文本文件，然后返回使用的编码。可以用这些方法打开任意的文档。如果你的程序并不是专业处理文本的程序，这些方法也值得考虑。对于 Foundation 级别的工具，或者不是自然语言的文本来说，这些方法可能不太合适。
+3. 如果 2 失败了，试试合适的老的编码。 这里「合适的」取决于具体情况。它可以是默认的 C 语言字符串编码，也可以是 `ISO` 或者 `Windows Latin 1` 编码，亦或者是其它的，取决于你的数据来源。
+4. 最终，还可以试试 `Application Kit` 里 `NSAttributedString` 类的载入方法（比如：`initWithFileURL:options:documentAttributes:error:`）。这些方法会尝试纯文本文件，然后返回使用的编码。可以用这些方法打开任意的文档。如果你的程序并不是专业处理文本的程序，这些方法也值得考虑。对于 `Foundation` 级别的工具，或者不是自然语言的文本来说，这些方法可能不太合适。
 
-网络传输文本应该UTF-8编码, 除非有特别的需要只能用其他的编码需要向文件中写入文本, 需要使用 `writeToURL:atomically:encoding:error:`方法, 这个方法会在UTF-16或UTF-32编码文件上自动加上字节顺序标记. 它还会把文件的编码存储在名为 `com.apple.TextEncoding` 的扩展文件属性里
+网络传输文本应该 `UTF-8` 编码, 除非有特别的需要只能用其他的编码需要向文件中写入文本, 需要使用 `writeToURL:atomically:encoding:error:`方法, 这个方法会在 `UTF-16` 或 `UTF-32` 编码文件上自动加上字节顺序标记. 它还会把文件的编码存储在名为 `com.apple.TextEncoding` 的扩展文件属性里
 
 
 本文主要参考: https://objccn.io/issue-9-1/
